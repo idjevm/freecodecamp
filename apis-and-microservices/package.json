@@ -1,0 +1,29 @@
+{
+  "name": "apis-and-microservices",
+  "version": "1.0.0",
+  "author": "JV",
+  "description": "This is the course for freeCodeCamp APIs and Microservices",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:idjevm/freecodecamp.git"
+  },
+  "keywords": [
+    "api",
+    "microservices"
+  ],
+  "dependencies": {
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idjevm/freecodecamp/issues"
+  },
+  "homepage": "https://github.com/idjevm/freecodecamp#readme"
+}
