@@ -30,7 +30,7 @@ app.route('/_api/package.json')
             if(err) {
                 next(err);
             }
-            res.type('txt').send(data.toString);
+            res.type('txt').send(data.toString());
         })
     });
 
