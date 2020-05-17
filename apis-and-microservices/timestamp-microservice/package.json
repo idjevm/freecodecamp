@@ -1,0 +1,21 @@
+{
+  "name": "jv-timestamp-microservice",
+  "version": "0.1.0",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fcc-express-bground": "https://github.com/Em-Ant/fcc-express-bground-pkg.git",
+    "mongodb": "^3.5.7",
+    "mongoose": "5.9.14"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "4.4.5"
+  }
+}
