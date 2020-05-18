@@ -1,19 +1,23 @@
 'use strict';
-const fs = require('fs'); 
-const express = require('express'); 
+// dotenv for .env
 require('dotenv').config()
 
+// init project
+const express = require('express');
 const app = express();
 
-const PORT = process.env.PORT;
+// enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+// so that your API is remotely testable by FCC 
+const cors = require('cors');
+app.use(cors({ optionSuccessStatus: 200 }));  // some legacy browsers choke on 204
 
-if(!process.env.DISALBE_XORIGIN) {
+if (!process.env.DISALBE_XORIGIN) {
     app.use((req, res, next) => {
         const allowedOrigins = ['https://narro-plane.gomix.me', 'https://www.freecodecamp.com'];
         const origin = req.header.origin || '*';
 
-        if(!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > 1) {
-            console.log(origin); 
+        if (!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > 1) {
+            console.log(origin);
             res.setHeader('Access-Control-Allow-Origin', origin);
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         }
@@ -21,40 +25,22 @@ if(!process.env.DISALBE_XORIGIN) {
     });
 }
 
-app.use('/public', express.static(process.cwd() + '/public'));
+// static files
+app.use(express.static('public'));
 
-app.route('/_api/package.json')
-    .get((req, res, next) => {
-        console.log('requested');
-        fs.readFile(__dirname + '/package.json', (err, data) => {
-            if(err) {
-                next(err);
-            }
-            res.type('txt').send(data.toString());
-        })
-    });
-
-app.route('/')
-    .get((req, res) => {
-        res.sendFile(process.cwd + '/views/index.html');
-    });
-
-// Respond Not Found if all the wrong routes
-app.use((req, res, next) => {
-    res.status(404);
-    res.type('txt').send('Not found');
+// server index.html
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + '/views/index.html');
 });
 
-// Erros Middleware
-app.use((err, req, res, next) => {
-    if(err) {
-        res.status(err.status || 500)
-            .type('txt')
-            .send(err.message || 'SEVER ERROR');
-    }
+//  API endpoints
+app.get("/api/hello", (req, res) => {
+    res.json({ greeting: 'hello API' });
 });
 
-app.listen(PORT, () => {
-    console.log(`Node.js is listing on port ${PORT}`);
+// listen for requests :)
+
+const listener = app.listen(process.env.PORT, () => {
+    console.log('Your app is listening on port ' + listener.address().port);
 });
 

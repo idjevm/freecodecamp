@@ -1,2 +1,4 @@
 apis-and-microservices/node_modules
 apis-and-microservices/.env
+apis-and-microservices/timestamp-microservice/.env
+apis-and-microservices/lessons_code/.env
